@@ -9,23 +9,31 @@ import pe.edu.upeu.syscenterlife.modelo.Cliente;
 public class ClienteService {
 
     List<Cliente> listaCli = new ArrayList<>();
-
-    public boolean saveEntidad(Cliente categoria) {
-        return this.listaCli.add(categoria);
+    
+    public ClienteService(){
+        Cliente c=new Cliente();
+        c.setDniruc("43621514");
+        c.setNombres("Ruben Apaza");
+        c.setDocumento("Natural");
+        listaCli.add(c);
     }
 
-    public List<Cliente> listarEntidad() {
+    public boolean saveEntidad(Cliente cliente) {//create
+        return this.listaCli.add(cliente);
+    }
+
+    public List<Cliente> listarEntidad() {//report
         return listaCli;
     }
 
-    public Cliente buscarCliente(String dnirucx) {
+    public Cliente buscarCliente(String dnirucx) {//buscar
         return listaCli.stream()
                 .filter(cliente -> cliente.getDniruc().equals(dnirucx))
                 .findFirst()
                 .orElse(null); // Devuelve null si no se encuentra ningún cliente
     }
 
-    public Cliente updateEntidad(Cliente clientex) {
+    public Cliente updateEntidad(Cliente clientex) {//Update
         listaCli.stream()
                 .filter(cliente
                         -> cliente.getDniruc().equals(clientex.getDniruc())) // Filtrar por DNI
@@ -36,8 +44,8 @@ public class ClienteService {
         return buscarCliente(clientex.getDniruc());
     }
 
-    public void deleteRegistEntdad(String dato) {
-        this.listaCli.remove(listaCli.stream()
+    public void deleteRegistEntdad(String dato) {//Delete
+        listaCli.remove(listaCli.stream()
                 .filter(cliente -> cliente.getDniruc().equals(dato))
                 .findFirst().orElse(null));
     }
