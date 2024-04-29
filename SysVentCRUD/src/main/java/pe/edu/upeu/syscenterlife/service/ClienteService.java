@@ -2,12 +2,16 @@ package pe.edu.upeu.syscenterlife.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pe.edu.upeu.syscenterlife.dao.ClienteDao;
 import pe.edu.upeu.syscenterlife.modelo.Cliente;
 
 @Service
 public class ClienteService {
-
+    
+    ClienteDao clienteDao;
+    
     List<Cliente> listaCli = new ArrayList<>();
     
     public ClienteService(){
@@ -23,7 +27,8 @@ public class ClienteService {
     }
 
     public List<Cliente> listarEntidad() {//report
-        return listaCli;
+        clienteDao=new ClienteDao();
+        return clienteDao.listarCliente();
     }
 
     public Cliente buscarCliente(String dnirucx) {//buscar
@@ -40,7 +45,7 @@ public class ClienteService {
                 .findFirst() // Obtener el primer cliente que cumpla con el filtro
                 .ifPresent(cliente
                         -> cliente.setNombres(clientex.getNombres()));
-//return this.listaCli.set(index, cliente);
+        //return this.listaCli.set(index, cliente);
         return buscarCliente(clientex.getDniruc());
     }
 
