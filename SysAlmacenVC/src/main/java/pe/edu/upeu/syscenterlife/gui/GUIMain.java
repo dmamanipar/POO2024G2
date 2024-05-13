@@ -149,7 +149,7 @@ public class GUIMain extends JFrame {
                 jtpane.removeAll();
                 //MainCliente mc = new MainCliente();
                 MainCliente mc = ctx.getBean(MainCliente.class);
-                
+                mc.setContexto(ctx);
                 mc.setPreferredSize(new Dimension(1024, 600));
                 scrollPane = new JScrollPane(mc);
                 scrollPane.setHorizontalScrollBarPolicy(
