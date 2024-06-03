@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.logging.Level;
 import pe.com.syscenterlife.autocomp.ModeloDataAutocomplet;
+import pe.edu.upeu.syscenterlife.modelo.ComboBoxOption;
 import pe.edu.upeu.syscenterlife.modelo.Producto;
 import pe.edu.upeu.syscenterlife.repositorio.ProductoRepository;
 import pe.edu.upeu.syscenterlife.util.ErrorLogger;
@@ -62,6 +63,15 @@ public class ProductoService {
             log.log(Level.SEVERE, "Error al realizar la busqueda", e);
         }
         return listarProducto;
+    }
+    
+    public List<ComboBoxOption> listaMarcaCombobox(Integer id){
+        List<ComboBoxOption> listar=new ArrayList<>();
+        for (Producto marca : productoRepository.listProductoMarca(id)) {
+            listar.add(new ComboBoxOption(String.valueOf(marca.getIdProducto()),
+                    marca.getNombre()));
+        }
+        return listar;
     }
 
 }
